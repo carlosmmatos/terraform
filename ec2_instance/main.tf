@@ -35,6 +35,14 @@ resource "aws_security_group" "this" {
     protocol    = "tcp"
     cidr_blocks = ["${local.ip}/32"]
   }
+
+  # Allow all outbound traffic
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 module "ec2_instance" {
